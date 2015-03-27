@@ -1,19 +1,14 @@
 //
-//  ViewController.m
+//  DrawingView.m
 //  DrawingApp
 //
 //  Created by Kwame Bryan on 2015-03-27.
 //  Copyright (c) 2015 3e Interactive. All rights reserved.
 //
 
-#import "ViewController.h"
-@import CoreGraphics;
+#import "DrawingView.h"
 
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
+@implementation DrawingView
 
 
 -(void)awakeFromNib {
@@ -21,20 +16,8 @@
     self.path = [[UIBezierPath alloc]init];
     self.path.lineJoinStyle = kCGLineJoinRound;
     self.path.lineCapStyle = kCGLineCapRound;
-    self.path.lineWidth = 5.0;
+    self.path.lineWidth = 5;
     
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
-    /**
-     *  Create a mutable path
-     *
-     *  @return <#return value description#>
-     */
-
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -43,32 +26,29 @@
      *
      *  @return return nothing
      */
-    CGPoint point = [[touches anyObject] locationInView:self.view];
+    CGPoint point = [[touches anyObject] locationInView:self];
     /**
      *  move the path drawing cursor to the starting point
      *
      *  @return returns nothing
      */
     [self.path moveToPoint:point];
+    NSLog(@"Screen Touched");
 }
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     // get the current point
-    CGPoint point = [[touches anyObject] locationInView:self.view];
+    CGPoint point = [[touches anyObject] locationInView:self];
     // add a new line segment to our path
     [self.path addLineToPoint:point];
     // redraw the view
-    [self.view setNeedsDisplay];
-    NSLog(@"Screen Touched");
+    [self setNeedsDisplay];
+    NSLog(@"Screen Moved");
 }
 -(void)drawRect:(CGRect) rect {
     // draw path
     [[UIColor clearColor] setFill];
     [[UIColor redColor] setStroke];
     [self.path stroke];
+    NSLog(@"Drawing Path");
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

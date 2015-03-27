@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DrawingView.h
 //  DrawingApp
 //
 //  Created by Kwame Bryan on 2015-03-27.
@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
 
-@interface ViewController : UIViewController
+@interface DrawingView : UIView
+
 
 @property (strong,nonatomic) UIBezierPath* path;
 
 
-@end
 
+@end
